@@ -1,3 +1,3 @@
 export const sayCWD = (directoryPath) => {
-    console.log(`You are currently in ${directoryPath}`);
-}
+  process.stdout.write(`You are currently in ${directoryPath}`);
+};

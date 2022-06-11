@@ -1,11 +1,7 @@
-import { retrieveUserName } from '../utils/arguments.js';
+import { retrieveUserName } from "../utils/arguments.js";
+import os from 'os';
 
 export const sayHello = () => {
-    const username = retrieveUserName();
-    const capitalizedUsername = capitalizeFirstLetter(username.toLowerCase());
-    console.log(`Welcome to the File Manager, ${capitalizedUsername}!`);
-}
-
-function capitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-}
+  const username = retrieveUserName();
+  process.stdout.write(`Welcome to the File Manager, ${username}!${os.EOL}`);
+};
