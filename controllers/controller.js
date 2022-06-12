@@ -20,6 +20,7 @@ import {
   remove,
   move,
 } from "../commands/files.js";
+import { zip } from "../commands/compress.js";
 
 let currentPath = os.homedir();
 
@@ -96,6 +97,15 @@ export const fileManagerController = async (line) => {
       pathIsFile(rmPath) ? remove(rmPath) : sayInputError();
       sayCWD(currentPath);
       break;
+    case "compress":
+      const compressOriginalPath = returnAbsolutPath(currentPath, inputs.arg1);
+      const compressPath = returnAbsolutPath(currentPath, inputs.arg2);
+      pathIsFile(compressOriginalPath) 
+        ? await zip(mvOrcompressOriginalPathiginalPath, compressPath)
+        : sayInputError();
+      sayCWD(currentPath);
+      break;
+
     default:
       sayInputError();
       sayCWD(currentPath);
