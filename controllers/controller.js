@@ -25,7 +25,8 @@ export const fileManagerController = (line) => {
             sayCWD(currentPath);
             break;
         case 'cd':
-            currentPath = changeDirectory(currentPath, inputs.arg1);
+            const changedPath = changeDirectory(currentPath, inputs.arg1);
+            changedPath ? currentPath = changedPath : sayInputError();
             sayCWD(currentPath);
             break;
         case 'test':
