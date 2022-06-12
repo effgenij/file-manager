@@ -2,6 +2,7 @@ import path from "path";
 import fs from "fs";
 import { readdir } from "fs/promises";
 import os from "os";
+import { returnAbsolutPath, pathIsDirectory } from "../utils/path.js"
 
 export const moveUp = (currentPath) => {
   const destinationPath = path.parse(currentPath).dir;
@@ -10,11 +11,8 @@ export const moveUp = (currentPath) => {
 
 export const changeDirectory = (currentPath, newPath) => {
   try {
-    const destinationPath = path.isAbsolute(newPath)
-      ? newPath
-      : path.join(currentPath, newPath);
-    const stats = fs.statSync(destinationPath);
-    return stats.isDirectory() ? destinationPath : undefined;
+    const destinationPath = returnAbsolutPath(currentPath, newPath);
+    return pathIsDirectory(destinationPath) ? destinationPath : undefined;
   } catch {
     return undefined;
   }
