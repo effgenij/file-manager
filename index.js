@@ -10,6 +10,6 @@ const rl = readline.createInterface({
 
 init();
 
-rl.on("line", async (line) => fileManagerController(line)).on("close", () =>
+rl.on("line", async (line) => await fileManagerController(line)).on("close", () =>
   sayGoodbye()
 );

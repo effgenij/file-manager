@@ -5,7 +5,7 @@ import { parseLine } from "../utils/parsing.js";
 import { sayInputError } from "../outputs/errors.js";
 import { OScommand } from "../commands/os.js";
 import { sayCWD } from "../outputs/cwd.js";
-import { moveUp, changeDirectory } from "../commands/navigation.js";
+import { moveUp, changeDirectory, list } from "../commands/navigation.js";
 
 let currentPath = os.homedir();
 
@@ -14,7 +14,7 @@ export const init = () => {
   sayCWD(currentPath);
 }
 
-export const fileManagerController = (line) => {
+export const fileManagerController = async (line) => {
     const inputs = parseLine(line);
     switch(inputs.command) {
         case '.exit':
@@ -27,6 +27,10 @@ export const fileManagerController = (line) => {
         case 'cd':
             const changedPath = changeDirectory(currentPath, inputs.arg1);
             changedPath ? currentPath = changedPath : sayInputError();
+            sayCWD(currentPath);
+            break;
+        case 'ls':
+            await list(currentPath);
             sayCWD(currentPath);
             break;
         case 'test':
